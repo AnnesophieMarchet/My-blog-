@@ -1,7 +1,9 @@
 package com.wildcodeschool.myblog.controller;
 
 import com.wildcodeschool.myblog.model.Article;
+import com.wildcodeschool.myblog.model.Category;
 import com.wildcodeschool.myblog.model.repository.ArticleRepository;
+import com.wildcodeschool.myblog.model.repository.CategoryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +15,11 @@ import java.util.List;
 @RequestMapping("/articles")
 public class ArticleController {
     private final ArticleRepository articleRepository;
-     public ArticleController(ArticleRepository articleRepository){
+    private final CategoryRepository categoryRepository;
+
+     public ArticleController(ArticleRepository articleRepository,   CategoryRepository categoryRepository){
          this.articleRepository= articleRepository;
+         this.categoryRepository = categoryRepository;
      }
 
 
@@ -40,8 +45,17 @@ public class ArticleController {
     public ResponseEntity<Article> createArticle(@RequestBody Article article) {
         article.setCreatedAt(LocalDateTime.now());
         article.setUpdatedAt(LocalDateTime.now());
+        // Ajout de la catégorie
+        if (article.getCategory() != null) {
+            Category category = categoryRepository.findById(article.getCategory().getId()).orElse(null);
+            if (category == null) {
+                return ResponseEntity.badRequest().body(null);
+            }
+            article.setCategory(category);
+        }
+
         Article savedArticle = articleRepository.save(article);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedArticle);
+        return ResponseEntity.ok(savedArticle);
     }
 
     @PutMapping("/{id}")
@@ -56,6 +70,14 @@ public class ArticleController {
         article.setContent(articleDetails.getContent());
         article.setUpdatedAt(LocalDateTime.now());
 
+        // Mise à jour de la catégorie
+        if (articleDetails.getCategory() != null) {
+            Category category = categoryRepository.findById(articleDetails.getCategory().getId()).orElse(null);
+            if (category == null) {
+                return ResponseEntity.badRequest().body(null);
+            }
+            article.setCategory(category);
+        }
         Article updatedArticle = articleRepository.save(article);
         return ResponseEntity.ok(updatedArticle);
     }
