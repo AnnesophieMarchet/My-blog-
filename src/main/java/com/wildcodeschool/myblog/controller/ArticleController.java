@@ -71,5 +71,55 @@ public class ArticleController {
         articleRepository.delete(article);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Article>> getArticlesByTitle(@RequestParam("title") String title) {
+        System.out.println("Searching for articles with title: " + title);
+        List<Article> articles = articleRepository.findByTitle(title);
+        if (articles.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(articles);
+    }
+//    @GetMapping("/search/content")
+//    public ResponseEntity<List<Article>> getArticlesByContent(@RequestParam("content") String content) {
+//        List<Article> articles = articleRepository.findByContent(content);
+//        if (articles.isEmpty()) {
+//            return ResponseEntity.noContent().build();
+//        }
+//        return ResponseEntity.ok(articles);
+//    }
+// Méthode pour liste d'articles dont le contenu contient une chaine de caractère fournie en paramètre
+    @GetMapping("/search/content")
+    public ResponseEntity<List<Article>> getArticlesByContent(@RequestParam("content") String content) {
+        List<Article> articles = articleRepository.findByContentContaining(content);
+        if (articles.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(articles);
+    }
+
+
+
+    // Méthode pour  des articles créés après une certaine date
+    @GetMapping("/search/createdAfter")
+    public ResponseEntity<List<Article>> getArticlesCreatedAfter(@RequestParam("date") String date) {
+        LocalDateTime createdAt = LocalDateTime.parse(date);
+        List<Article> articles = articleRepository.findByCreatedAtAfter(createdAt);
+        if (articles.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(articles);
+    }
+
+    // Méthode  5 derniers articles créés
+    @GetMapping("/latest")
+    public ResponseEntity<List<Article>> getFiveLastArticles() {
+        List<Article> articles = articleRepository.findTop5ByOrderByCreatedAtDesc();
+        if (articles.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(articles);
+    }
 }
 

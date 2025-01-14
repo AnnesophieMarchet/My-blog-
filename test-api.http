@@ -1,0 +1,26 @@
+#GET http://localhost:8080/articles
+#Content-Type: application/json
+
+#POST http://localhost:8080/articles
+#Content-Type: application/json
+#
+#{
+#  "title": "Nouvel article",
+#  "content": "Contenu de l'article"
+#}
+
+
+
+#DELETE http://localhost:8080/articles/1
+
+#GET http://localhost:8080/articles/search?title=Nouvel article
+
+#GET http://localhost:8080/articles/search/content?content=article
+#GET http://localhost:8080/articles/search/content?content=article
+#
+#
+#GET http://localhost:8080/articles/search/createdAfter?date=2025-01-01T00:00:00
+#GET http://localhost:8080/articles/search/createdAfter?date=2025-01-01T00:00:00
+
+
+GET http://localhost:8080/articles/latest
