@@ -2,6 +2,9 @@
 #GET http://localhost:8080/articles
 #Content-Type: application/json
 
+# GET http://localhost:8080/articles/10
+#Content-Type: application/json
+
 
 #POST http://localhost:8080/articles
 #Content-Type: application/json
@@ -12,7 +15,7 @@
 #}
 
 
-#
+
 #POST http://localhost:8080/articles
 #Content-Type: application/json
 #
@@ -73,5 +76,31 @@
 #  "categoryId": 1
 #}
 
-GET http://localhost:8080/articles/latest
+#GET http://localhost:8080/articles/latest
+
+
+#GET http://localhost:8080/categories
+#Content-Type: application/json
+
+#GET http://localhost:8080/categories/1
+#Content-Type: application/json
+
+POST http://localhost:8080/categories
+Content-Type: application/json
+
+{
+  "name": "Angular"
+}
+
+#PUT http://localhost:8080/categories/1
+#Content-Type: application/json
+#
+#{
+#  "name": "PLay"
+#}
+
+
+#DELETE http://localhost:8080/categories/1
+##Content-Type: application/json
+
 

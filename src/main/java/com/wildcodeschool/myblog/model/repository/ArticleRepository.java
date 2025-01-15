@@ -20,4 +20,6 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     List<Article> findByCategory(Category category);
 
+    List<Article> findTop5ByOrderByCreatedAtDesc();
+
 }
