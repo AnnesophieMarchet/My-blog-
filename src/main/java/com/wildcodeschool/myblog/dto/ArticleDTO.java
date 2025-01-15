@@ -1,14 +1,16 @@
 package com.wildcodeschool.myblog.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ArticleDTO {
     private Long id;
     private String title;
     private String content;
     private LocalDateTime updatedAt;
+    private LocalDateTime createdAt;
     private String categoryName;
-
+    private List<String> imageUrls;
     // Getters et setters
 
     public Long getId() {
@@ -43,7 +45,13 @@ public class ArticleDTO {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+    public LocalDateTime getCreatedAt() {
+        return createdAt;  // Getter pour createdAt
+    }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;  // Setter pour createdAt
+    }
     public String getCategoryName() {
         return categoryName;
     }
@@ -51,4 +59,14 @@ public class ArticleDTO {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+
+
+    public List<String> getImageUrls() {
+        return imageUrls;
+    }
+
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
+
 }

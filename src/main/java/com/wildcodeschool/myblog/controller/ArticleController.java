@@ -3,13 +3,16 @@ package com.wildcodeschool.myblog.controller;
 import com.wildcodeschool.myblog.dto.ArticleDTO;
 import com.wildcodeschool.myblog.model.Article;
 import com.wildcodeschool.myblog.model.Category;
+import com.wildcodeschool.myblog.model.Image;
 import com.wildcodeschool.myblog.model.repository.ArticleRepository;
 import com.wildcodeschool.myblog.model.repository.CategoryRepository;
+import com.wildcodeschool.myblog.model.repository.ImageRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,18 +22,24 @@ public class ArticleController {
     private final ArticleRepository articleRepository;
     private final CategoryRepository categoryRepository;
 
+
      public ArticleController(ArticleRepository articleRepository,   CategoryRepository categoryRepository){
          this.articleRepository= articleRepository;
          this.categoryRepository = categoryRepository;
+
      }
     private ArticleDTO convertToDTO(Article article) {
         ArticleDTO articleDTO = new ArticleDTO();
         articleDTO.setId(article.getId());
         articleDTO.setTitle(article.getTitle());
         articleDTO.setContent(article.getContent());
+        articleDTO.setCreatedAt(article.getCreatedAt());
         articleDTO.setUpdatedAt(article.getUpdatedAt());
         if (article.getCategory() != null) {
             articleDTO.setCategoryName(article.getCategory().getName());
+        }
+        if (article.getImages() != null) {
+            articleDTO.setImageUrls(article.getImages().stream().map(Image::getUrl).collect(Collectors.toList()));
         }
         return articleDTO;
     }
@@ -59,7 +68,7 @@ public class ArticleController {
     public ResponseEntity<ArticleDTO> createArticle(@RequestBody Article article) {
         article.setCreatedAt(LocalDateTime.now());
         article.setUpdatedAt(LocalDateTime.now());
-        // Ajout de la catégorie
+
         if (article.getCategory() != null) {
             Category category = categoryRepository.findById(article.getCategory().getId()).orElse(null);
             if (category == null) {
