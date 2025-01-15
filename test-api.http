@@ -1,5 +1,7 @@
+
 #GET http://localhost:8080/articles
 #Content-Type: application/json
+
 
 #POST http://localhost:8080/articles
 #Content-Type: application/json
@@ -8,6 +10,22 @@
 #  "title": "Nouvel article",
 #  "content": "Contenu de l'article"
 #}
+
+
+#
+#POST http://localhost:8080/articles
+#Content-Type: application/json
+#
+#
+#{
+#  "title": "Introduction à Java",
+#  "content": "Java est un langage orienté objet.",
+#  "category": {
+#    "id": 1
+#  }
+#
+#}
+
 
 
 
@@ -23,4 +41,37 @@
 #GET http://localhost:8080/articles/search/createdAfter?date=2025-01-01T00:00:00
 
 
+
+#GET http://localhost:8080/articles/latest
+
+
+#
+#POST http://localhost:8080/categories
+#Content-Type: application/json
+#
+#{
+#    "name": "Technology"
+#}
+
+
+#POST http://localhost:8080/articles
+#Content-Type: application/json
+#
+#{
+#  "title": "Introduction to Spring Boot",
+#  "content": "Spring Boot simplifies the development of Spring-based applications.",
+#  "categoryId": 1
+#}
+
+#
+#PUT  http://localhost:8080/articles/7
+#Content-Type: application/json
+#
+#{
+#  "title": "Updated Introduction to Spring Boot",
+#  "content": "Spring Boot now includes more features for easier application development.",
+#  "categoryId": 1
+#}
+
 GET http://localhost:8080/articles/latest
+
