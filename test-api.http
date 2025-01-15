@@ -1,5 +1,5 @@
-#GET http://localhost:8080/articles
-#Content-Type: application/json
+GET http://localhost:8080/articles
+Content-Type: application/json
 
 #POST http://localhost:8080/articles
 #Content-Type: application/json
@@ -7,6 +7,20 @@
 #{
 #  "title": "Nouvel article",
 #  "content": "Contenu de l'article"
+#}
+
+#
+#POST http://localhost:8080/articles
+#Content-Type: application/json
+#
+#
+#{
+#  "title": "Introduction à Java",
+#  "content": "Java est un langage orienté objet.",
+#  "category": {
+#    "id": 1
+#  }
+#
 #}
 
 
@@ -26,7 +40,7 @@
 #GET http://localhost:8080/articles/latest
 
 
-
+#
 #POST http://localhost:8080/categories
 #Content-Type: application/json
 #
@@ -44,12 +58,12 @@
 #  "categoryId": 1
 #}
 
-
-PUT  http://localhost:8080/articles/7
-Content-Type: application/json
-
-{
-  "title": "Updated Introduction to Spring Boot",
-  "content": "Spring Boot now includes more features for easier application development.",
-  "categoryId": 1
-}
+#
+#PUT  http://localhost:8080/articles/7
+#Content-Type: application/json
+#
+#{
+#  "title": "Updated Introduction to Spring Boot",
+#  "content": "Spring Boot now includes more features for easier application development.",
+#  "categoryId": 1
+#}
