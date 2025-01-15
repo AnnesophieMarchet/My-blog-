@@ -85,12 +85,12 @@
 #GET http://localhost:8080/categories/1
 #Content-Type: application/json
 
-POST http://localhost:8080/categories
-Content-Type: application/json
-
-{
-  "name": "Angular"
-}
+#POST http://localhost:8080/categories
+#Content-Type: application/json
+#
+#{
+#  "name": "Angular"
+#}
 
 #PUT http://localhost:8080/categories/1
 #Content-Type: application/json
@@ -104,3 +104,19 @@ Content-Type: application/json
 ##Content-Type: application/json
 
 
+#GET http://localhost:8080/articles
+
+POST http://localhost:8080/articles
+Content-Type: application/json
+
+{
+    "title": "Nouveau Article",
+    "content": "Contenu du nouvel article...",
+    "createdAt": "2025-01-15T11:00:00",
+    "updatedAt": "2025-01-15T11:15:00",
+    "categoryName": "Technology",
+    "imageUrls": [
+        "http://example.com/newimage1.jpg",
+        "http://example.com/newimage2.jpg"
+    ]
+}
